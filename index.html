@@ -2,218 +2,373 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<title>IOI 2026 UZ — Mehmonxona Navigatori</title>
+<title>IOI 2026 UZ — Mehmonxona Navigatori & Volontyor Tizimi</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap');
+:root {
+  --bg-canvas: #f8fafc;
+  --surface: #ffffff;
+  --ink: #0f172a;
+  --ink-soft: #475569;
+  --ink-faint: #94a3b8;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
 
-:root{
-  --bg:#F2F4F7;
-  --surface:#FFFFFF;
-  --ink:#12141C;
-  --ink-soft:#5B6072;
-  --ink-faint:#9298A8;
-  --line:#E3E6EC;
-  --accent:#16A34A;
-  --accent-dark:#0E7A37;
-  --accent-soft:#E7F7ED;
-  --indigo:#3733A6;
-  --indigo-soft:#ECEBFA;
-  --amber:#F59E0B;
-  --amber-soft:#FEF3DA;
-  --red:#E5484D;
-  --red-soft:#FCE7E8;
+  --accent: #10b981;
+  --accent-dark: #047857;
+  --accent-soft: #d1fae5;
 
-  --navoi:#2563EB; --buxoro:#7C3AED; --fargona:#0D9488; --andijon:#DB2777;
-  --namangan:#EA580C; --sirdaryo:#059669; --jizzax:#B45309; --xorazm:#4F46E5;
-  --qoraqalpaq:#0284C7; --kashkadaryo:#A16207; --surxondaryo:#65A30D; --yangitosh:#9333EA;
+  --indigo: #4f46e5;
+  --indigo-dark: #3730a3;
+  --indigo-soft: #e0e7ff;
+
+  --amber: #f59e0b;
+  --amber-soft: #fef3c7;
+
+  --red: #ef4444;
+  --red-soft: #fee2e2;
+
+  --blue: #3b82f6;
+  --blue-soft: #dbeafe;
+
+  --purple: #8b5cf6;
+  --purple-soft: #ede9fe;
+
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 14px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 20px 30px -8px rgba(15, 23, 42, 0.12), 0 8px 12px -6px rgba(15, 23, 42, 0.04);
 }
 
-*{box-sizing:border-box; margin:0; padding:0;}
-body{
-  background:var(--bg);
-  font-family:'Inter',sans-serif;
-  color:var(--ink);
-  padding:32px 16px 80px;
-  min-height:100vh;
-}
-.wrap{max-width:1180px; margin:0 auto;}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ---------- HEADER / CONTROLS ---------- */
-.topbar{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; margin-bottom:28px;}
-.brand{display:flex; align-items:center; gap:12px;}
-.brand-mark{
-  width:40px; height:40px; border-radius:10px; background:var(--accent);
-  display:flex; align-items:center; justify-content:center;
-  font-family:'JetBrains Mono',monospace; font-weight:700; color:#fff; font-size:14px;
-}
-.brand h1{font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:700; letter-spacing:-0.01em;}
-.brand p{font-size:12.5px; color:var(--ink-soft); margin-top:1px;}
-
-.controls{display:flex; gap:10px; flex-wrap:wrap;}
-.roletabs{display:flex; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:4px; gap:2px;}
-.roletabs button{
-  border:none; background:transparent; font-family:'Inter'; font-weight:600; font-size:13px;
-  color:var(--ink-soft); padding:9px 16px; border-radius:9px; cursor:pointer; transition:.15s;
-}
-.roletabs button.active{background:var(--ink); color:#fff;}
-.devicetoggle{display:flex; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:4px; gap:2px;}
-.devicetoggle button{
-  border:none; background:transparent; font-weight:600; font-size:13px; color:var(--ink-soft);
-  padding:9px 14px; border-radius:9px; cursor:pointer; display:flex; align-items:center; gap:6px;
-}
-.devicetoggle button.active{background:var(--accent-soft); color:var(--accent-dark);}
-
-.role-note{
-  font-size:12.5px; color:var(--ink-soft); background:var(--surface); border:1px solid var(--line);
-  border-radius:10px; padding:10px 14px; margin-bottom:24px; max-width:720px;
-}
-.role-note b{color:var(--ink);}
-
-/* ---------- FRAMES ---------- */
-.stage{display:flex; justify-content:center;}
-.phone{
-  width:375px; background:var(--ink); border-radius:38px; padding:12px;
-  box-shadow:0 24px 60px -20px rgba(18,20,28,.35);
-}
-.phone-screen{
-  background:var(--bg); border-radius:28px; overflow:hidden; min-height:720px;
-  display:flex; flex-direction:column;
-}
-.phone-notch{height:26px; display:flex; align-items:center; justify-content:center;}
-.phone-notch::before{content:''; width:90px; height:6px; background:#000; border-radius:6px;}
-
-.desktopwin{
-  width:100%; max-width:1080px; background:var(--surface); border-radius:16px; overflow:hidden;
-  border:1px solid var(--line); box-shadow:0 24px 60px -24px rgba(18,20,28,.25);
-}
-.winbar{background:#EAEDF2; padding:10px 16px; display:flex; align-items:center; gap:8px;}
-.winbar span{width:10px; height:10px; border-radius:50%; background:#D3D7DE;}
-.desktop-body{padding:28px 32px; min-height:640px;}
-
-/* ---------- SHARED UI BITS ---------- */
-.appbar{padding:18px 18px 14px; display:flex; align-items:center; justify-content:space-between;}
-.appbar .who{font-family:'Space Grotesk'; font-weight:700; font-size:16px;}
-.appbar .sub{font-size:11.5px; color:var(--ink-soft); margin-top:1px;}
-.avatar{width:34px; height:34px; border-radius:50%; background:var(--indigo-soft); color:var(--indigo);
-  display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; font-family:'JetBrains Mono';}
-
-.chip{
-  display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:600;
-  padding:4px 9px; border-radius:100px; color:#fff;
-}
-.chip::before{content:''; width:6px; height:6px; border-radius:50%; background:#fff; opacity:.85;}
-
-.card{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px;}
-
-.search{
-  display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--line);
-  border-radius:12px; padding:11px 14px; font-size:13.5px; color:var(--ink-faint);
-}
-.search svg{flex:none;}
-
-/* ---------- DELEGATE: TICKET ---------- */
-.ticket{
-  background:var(--surface); border-radius:18px; position:relative; overflow:hidden;
-  border:1px solid var(--line);
-}
-.ticket-top{padding:18px 18px 16px; display:flex; justify-content:space-between; align-items:flex-start;}
-.ticket-top .country{font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint);}
-.ticket-top .name{font-family:'Space Grotesk'; font-size:19px; font-weight:700; margin-top:3px;}
-.ticket-top .role-badge{
-  font-size:10.5px; font-weight:700; background:var(--indigo-soft); color:var(--indigo);
-  padding:4px 9px; border-radius:100px; text-transform:uppercase; letter-spacing:.04em;
-}
-.perf{position:relative; height:0;}
-.perf::before{
-  content:''; position:absolute; left:-9px; top:-9px; width:18px; height:18px; border-radius:50%; background:var(--bg);
-}
-.perf::after{
-  content:''; position:absolute; right:-9px; top:-9px; width:18px; height:18px; border-radius:50%; background:var(--bg);
-}
-.dash{border-top:2px dashed var(--line); margin:0 18px;}
-.ticket-bottom{padding:16px 18px 20px; display:flex; gap:14px;}
-.tb-block{flex:1;}
-.tb-label{font-size:10px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px;}
-.tb-value{font-family:'JetBrains Mono'; font-size:20px; font-weight:700;}
-.tb-value.small{font-size:15px;}
-.tb-hotel{display:flex; align-items:center; gap:8px; margin-top:2px;}
-
-.route-btn{
-  margin:0 18px 18px; background:var(--accent); color:#fff; border:none; border-radius:12px;
-  padding:13px; font-weight:700; font-size:13.5px; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;
+body {
+  background: var(--bg-canvas);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.04) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.04) 0px, transparent 50%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ink);
+  padding: 24px 16px 60px;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-.mini-map{
-  height:150px; border-radius:14px; background:
-    linear-gradient(135deg, #EEF1F5 25%, transparent 25%) -8px 0/16px 16px,
-    linear-gradient(225deg, #EEF1F5 25%, transparent 25%) -8px 0/16px 16px,
-    #F7F8FA;
-  border:1px solid var(--line); position:relative; overflow:hidden;
+.wrap { max-width: 1200px; margin: 0 auto; }
+
+/* Topbar Header */
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  background: var(--surface);
+  padding: 16px 22px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
 }
-.mini-map .pin{
-  position:absolute; width:26px; height:26px; border-radius:50% 50% 50% 0; background:var(--red);
-  transform:rotate(-45deg); left:58%; top:38%; box-shadow:0 4px 10px rgba(229,72,77,.4);
+
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-mark {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--indigo) 0%, #312e81 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-weight: 800; color: #fff; font-size: 15px;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
 }
-.mini-map .pin::after{content:''; width:9px; height:9px; background:#fff; border-radius:50%; position:absolute; top:6px; left:6px;}
-.mini-map .youarehere{position:absolute; left:16%; bottom:18%; font-size:10px; font-weight:700; background:var(--ink); color:#fff; padding:3px 8px; border-radius:100px;}
+.brand h1 {
+  font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700;
+  letter-spacing: -0.02em; color: var(--ink);
+}
+.brand p { font-size: 13px; color: var(--ink-soft); margin-top: 1px; }
 
-.roommate-row{display:flex; align-items:center; gap:10px; padding:10px 0; border-top:1px solid var(--line);}
-.roommate-row:first-child{border-top:none;}
-.rm-av{width:30px; height:30px; border-radius:50%; background:var(--accent-soft); color:var(--accent-dark); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono';}
-.rm-name{font-size:13px; font-weight:600;}
-.rm-sub{font-size:11px; color:var(--ink-soft);}
+.controls { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
 
-/* ---------- VOLUNTEER ---------- */
-.filterrow{display:flex; gap:8px; overflow-x:auto; padding:2px 0 4px;}
-.filterrow .chip.outline{background:transparent; border:1px solid var(--line); color:var(--ink-soft); white-space:nowrap;}
-.filterrow .chip.outline::before{display:none;}
-.filterrow .chip.outline.on{background:var(--ink); color:#fff; border-color:var(--ink);}
+.roletabs {
+  display: flex; background: #f1f5f9; border: 1px solid var(--line);
+  border-radius: 14px; padding: 4px; gap: 4px;
+}
+.roletabs button {
+  border: none; background: transparent; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px;
+  color: var(--ink-soft); padding: 9px 18px; border-radius: 10px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.roletabs button:hover { color: var(--ink); }
+.roletabs button.active {
+  background: var(--ink); color: #fff; box-shadow: var(--shadow-sm);
+}
 
-.deleg-row{display:flex; align-items:center; gap:12px; padding:13px; border-bottom:1px solid var(--line); cursor:pointer;}
-.deleg-row:last-child{border-bottom:none;}
-.flag{width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:15px; background:var(--indigo-soft);}
-.deleg-main{flex:1; min-width:0;}
-.deleg-main .t{font-size:13.5px; font-weight:700;}
-.deleg-main .s{font-size:11.5px; color:var(--ink-soft); margin-top:1px;}
-.count-badge{font-family:'JetBrains Mono'; font-size:11px; font-weight:700; color:var(--ink-soft); background:var(--bg); padding:4px 8px; border-radius:8px;}
+.devicetoggle {
+  display: flex; background: #f1f5f9; border: 1px solid var(--line);
+  border-radius: 14px; padding: 4px; gap: 4px;
+}
+.devicetoggle button {
+  border: none; background: transparent; font-weight: 600; font-size: 13px; color: var(--ink-soft);
+  padding: 9px 14px; border-radius: 10px; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.devicetoggle button.active {
+  background: var(--surface); color: var(--indigo); box-shadow: var(--shadow-sm);
+}
 
-/* ---------- ORGANIZER ---------- */
-.statgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
-.statcard{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:15px;}
-.statcard .n{font-family:'Space Grotesk'; font-size:24px; font-weight:700;}
-.statcard .l{font-size:11.5px; color:var(--ink-soft); margin-top:2px;}
-.statcard.warn{background:var(--red-soft); border-color:#F6C7C9;}
-.statcard.warn .n{color:var(--red);}
+.role-note {
+  font-size: 13px; line-height: 1.5; color: var(--ink-soft); background: var(--surface);
+  border: 1px solid var(--line); border-left: 4px solid var(--indigo);
+  border-radius: 14px; padding: 12px 18px; margin-bottom: 24px; box-shadow: var(--shadow-sm);
+}
+.role-note b { color: var(--ink); }
 
-.hotelbar-row{display:flex; align-items:center; gap:12px; padding:11px 0;}
-.hb-label{width:120px; font-size:12.5px; font-weight:600; flex:none;}
-.hb-track{flex:1; height:10px; background:var(--bg); border-radius:100px; overflow:hidden; position:relative;}
-.hb-fill{height:100%; border-radius:100px;}
-.hb-num{width:74px; text-align:right; font-family:'JetBrains Mono'; font-size:11.5px; color:var(--ink-soft); flex:none;}
+/* Stage & Device Containers */
+.stage { display: flex; justify-content: center; }
 
-.alertline{display:flex; gap:10px; align-items:flex-start; padding:11px 0; border-top:1px solid var(--line);}
-.alertline:first-child{border-top:none;}
-.alertdot{width:8px; height:8px; border-radius:50%; margin-top:5px; flex:none;}
-.alertline .at{font-size:12.5px; font-weight:600;}
-.alertline .as{font-size:11.5px; color:var(--ink-soft); margin-top:1px;}
+.phone {
+  width: 390px; background: #0f172a; border-radius: 46px; padding: 12px;
+  box-shadow: 0 30px 70px -15px rgba(15, 23, 42, 0.4), 0 0 0 10px #1e293b;
+  position: relative; transition: all 0.3s ease;
+}
+.phone-screen {
+  background: var(--bg-canvas); border-radius: 36px; overflow: hidden; min-height: 750px;
+  display: flex; flex-direction: column; position: relative;
+}
+.phone-notch {
+  height: 28px; display: flex; align-items: center; justify-content: center;
+  background: var(--bg-canvas); z-index: 10;
+}
+.phone-notch::before { content: ''; width: 96px; height: 18px; background: #0f172a; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
 
-.floorplan{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; font-family:'JetBrains Mono'; font-size:11px; font-weight:700;}
-.room{padding:8px 6px; border-radius:8px; text-align:center; color:#fff;}
-.room.std{background:#EAB308;}
-.room.dlx{background:#0EA5E9;}
-.room.suite{background:#EC4899;}
-.room.stair{background:#CBD1DB; color:var(--ink-soft);}
-.room .code{display:block; font-size:12px; margin-top:2px;}
+.desktopwin {
+  width: 100%; max-width: 1120px; background: var(--surface); border-radius: 20px; overflow: hidden;
+  border: 1px solid var(--line); box-shadow: var(--shadow-lg); transition: all 0.3s ease;
+}
+.winbar {
+  background: #f1f5f9; padding: 12px 18px; display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.winbar span { width: 11px; height: 11px; border-radius: 50%; }
+.winbar span:nth-child(1) { background: #ef4444; }
+.winbar span:nth-child(2) { background: #f59e0b; }
+.winbar span:nth-child(3) { background: #10b981; }
+.desktop-body { padding: 32px; min-height: 680px; }
 
-.twocol{display:grid; grid-template-columns:1.15fr .85fr; gap:24px;}
-.section-title{font-family:'Space Grotesk'; font-weight:700; font-size:14px; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between;}
-.section-title span.tag{font-family:'Inter'; font-size:11px; font-weight:600; color:var(--ink-faint);}
+/* Shared UI Components */
+.appbar { padding: 18px 20px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(226, 232, 240, 0.7); }
+.appbar .who { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px; color: var(--ink); }
+.appbar .sub { font-size: 12px; color: var(--ink-soft); margin-top: 2px; display: flex; align-items: center; gap: 6px; }
+.avatar {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--indigo-soft); color: var(--indigo-dark);
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;
+  font-family: 'JetBrains Mono', monospace; border: 2px solid var(--surface); box-shadow: var(--shadow-sm);
+}
 
-@media (max-width:1040px){
-  .stage{overflow-x:auto;}
-  .twocol{grid-template-columns:1fr;}
-  .statgrid{grid-template-columns:repeat(2,1fr);}
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600;
+  padding: 4px 10px; border-radius: 100px; color: #fff; transition: transform 0.15s ease;
+}
+.chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; opacity: 0.9; }
+
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px;
+  box-shadow: var(--shadow-sm); transition: all 0.2s ease;
+}
+.card:hover { border-color: var(--line-strong); }
+
+.search {
+  display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 14px; padding: 10px 14px; font-size: 13.5px; color: var(--ink);
+  box-shadow: var(--shadow-sm); transition: all 0.2s ease;
+}
+.search:focus-within { border-color: var(--indigo); box-shadow: 0 0 0 3px var(--indigo-soft); }
+.search input { border: none; outline: none; background: transparent; width: 100%; font-family: inherit; font-size: 13.5px; color: var(--ink); }
+.search input::placeholder { color: var(--ink-faint); }
+
+/* Ticket Card */
+.ticket {
+  background: var(--surface); border-radius: 20px; position: relative; overflow: hidden;
+  border: 1px solid var(--line); box-shadow: var(--shadow-md); transition: all 0.25s ease;
+}
+.ticket:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.ticket-top { padding: 20px 20px 16px; display: flex; justify-content: space-between; align-items: flex-start; }
+.ticket-top .country { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+.ticket-top .name { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; margin-top: 4px; color: var(--ink); }
+.ticket-top .role-badge {
+  font-size: 11px; font-weight: 700; background: var(--indigo-soft); color: var(--indigo-dark);
+  padding: 5px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.perf { position: relative; height: 0; z-index: 2; }
+.perf::before {
+  content: ''; position: absolute; left: -10px; top: -10px; width: 20px; height: 20px; border-radius: 50%; background: var(--bg-canvas);
+  border-right: 1px solid var(--line);
+}
+.perf::after {
+  content: ''; position: absolute; right: -10px; top: -10px; width: 20px; height: 20px; border-radius: 50%; background: var(--bg-canvas);
+  border-left: 1px solid var(--line);
+}
+.dash { border-top: 2px dashed var(--line); margin: 0 20px; }
+.ticket-bottom { padding: 18px 20px 22px; display: flex; gap: 16px; background: #fafafa; }
+.tb-block { flex: 1; }
+.tb-label { font-size: 10.5px; font-weight: 700; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+.tb-value { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: var(--ink); }
+.tb-value.small { font-size: 16px; font-weight: 600; }
+.tb-hotel { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+
+.route-btn {
+  width: calc(100% - 36px); margin: 0 18px 18px; background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-dark) 100%);
+  color: #fff; border: none; border-radius: 14px; padding: 14px; font-weight: 700; font-size: 14px;
+  display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35); transition: all 0.2s ease;
+}
+.route-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45); }
+
+.action-btn-group {
+  display: flex; gap: 10px; padding: 0 18px 16px;
+}
+.btn-secondary {
+  flex: 1; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface);
+  font-weight: 600; font-size: 13px; color: var(--ink); display: flex; align-items: center; justify-content: center;
+  gap: 8px; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-sm);
+}
+.btn-secondary:hover { background: #f8fafc; border-color: var(--indigo); color: var(--indigo); }
+
+.mini-map {
+  height: 160px; border-radius: 16px; background:
+    linear-gradient(135deg, #e2e8f0 25%, transparent 25%) -10px 0/20px 20px,
+    linear-gradient(225deg, #e2e8f0 25%, transparent 25%) -10px 0/20px 20px,
+    #f1f5f9;
+  border: 1px solid var(--line); position: relative; overflow: hidden;
+}
+.mini-map .pin {
+  position: absolute; width: 28px; height: 28px; border-radius: 50% 50% 50% 0; background: var(--red);
+  transform: rotate(-45deg); left: 55%; top: 35%; box-shadow: 0 6px 12px rgba(239, 68, 68, 0.4);
+  animation: pulsePin 2s infinite;
+}
+@keyframes pulsePin {
+  0%, 100% { transform: rotate(-45deg) scale(1); }
+  50% { transform: rotate(-45deg) scale(1.1); }
+}
+.mini-map .pin::after { content: ''; width: 10px; height: 10px; background: #fff; border-radius: 50%; position: absolute; top: 6px; left: 6px; }
+.mini-map .youarehere {
+  position: absolute; left: 16%; bottom: 16%; font-size: 11px; font-weight: 700;
+  background: var(--ink); color: #fff; padding: 4px 10px; border-radius: 100px; box-shadow: var(--shadow-sm);
+}
+
+.roommate-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.roommate-row:first-child { border-top: none; padding-top: 4px; }
+.rm-av {
+  width: 34px; height: 34px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-dark);
+  font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace;
+}
+.rm-name { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+.rm-sub { font-size: 11.5px; color: var(--ink-soft); margin-top: 1px; }
+
+/* Volunteer View Specific Styling */
+.vol-banner {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  color: #fff; border-radius: 16px; padding: 16px; margin: 0 18px 14px;
+  box-shadow: 0 8px 20px rgba(49, 46, 129, 0.2); display: flex; align-items: center; justify-content: space-between;
+}
+.vol-banner .title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #a5b4fc; }
+.vol-banner .name { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; margin-top: 2px; color: #fff; }
+.vol-banner .badge-country {
+  background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); padding: 6px 12px; border-radius: 100px;
+  font-size: 12.5px; font-weight: 700; border: 1px solid rgba(255, 255, 255, 0.2); display: flex; align-items: center; gap: 6px;
+}
+
+.filter-btn {
+  display: inline-flex; align-items: center; gap: 7px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 14px; padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--ink-soft);
+  cursor: pointer; box-shadow: var(--shadow-sm); transition: all 0.2s ease; position: relative; white-space: nowrap;
+}
+.filter-btn:hover { background: #f8fafc; border-color: var(--indigo); color: var(--indigo); }
+.filter-btn.active { background: var(--indigo-soft); border-color: var(--indigo); color: var(--indigo-dark); font-weight: 700; }
+.filter-btn .filter-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--indigo); position: absolute; top: 6px; right: 6px;
+}
+
+.filter-accordion-panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+  padding: 14px 16px; margin: 0 18px 14px; box-shadow: var(--shadow-sm);
+  animation: slideDown 0.25s ease-out;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.filterrow { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.filterrow::-webkit-scrollbar { display: none; }
+.filterrow .chip.outline { background: var(--surface); border: 1px solid var(--line); color: var(--ink-soft); white-space: nowrap; cursor: pointer; transition: all 0.2s; }
+.filterrow .chip.outline::before { display: none; }
+.filterrow .chip.outline.on { background: var(--indigo); color: #fff; border-color: var(--indigo); font-weight: 700; box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3); }
+
+.member-card {
+  display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--line);
+  cursor: pointer; transition: all 0.2s ease; background: var(--surface); border-radius: 14px; margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+}
+.member-card:hover { transform: translateY(-2px); border-color: var(--indigo); box-shadow: var(--shadow-md); background: #fafafa; }
+.member-card:last-child { margin-bottom: 0; }
+.m-avatar {
+  width: 42px; height: 42px; border-radius: 12px; background: var(--indigo-soft); color: var(--indigo-dark);
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
+  font-family: 'JetBrains Mono', monospace; flex-shrink: 0;
+}
+.m-info { flex: 1; min-width: 0; }
+.m-info .name { font-size: 14.5px; font-weight: 700; color: var(--ink); display: flex; align-items: center; justify-content: space-between; }
+.m-info .sub { font-size: 12px; color: var(--ink-soft); margin-top: 3px; display: flex; align-items: center; gap: 8px; }
+.status-pill {
+  font-size: 10.5px; font-weight: 700; padding: 3px 8px; border-radius: 100px;
+}
+.status-pill.checked { background: var(--accent-soft); color: var(--accent-dark); }
+.status-pill.arriving { background: var(--amber-soft); color: #b45309; }
+
+.back-btn-header {
+  display: flex; align-items: center; gap: 8px; padding: 12px 18px; font-size: 13.5px; font-weight: 700;
+  color: var(--indigo); cursor: pointer; transition: color 0.15s; background: transparent; border: none;
+}
+.back-btn-header:hover { color: var(--indigo-dark); }
+
+/* Organizer Layout */
+.statgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.statcard { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); }
+.statcard .n { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; color: var(--ink); }
+.statcard .l { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+.statcard.warn { background: var(--red-soft); border-color: #fca5a5; }
+.statcard.warn .n { color: var(--red); }
+
+.hotelbar-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; }
+.hb-label { width: 110px; font-size: 13px; font-weight: 600; flex: none; color: var(--ink); }
+.hb-track { flex: 1; height: 10px; background: #e2e8f0; border-radius: 100px; overflow: hidden; position: relative; }
+.hb-fill { height: 100%; border-radius: 100px; transition: width 0.4s ease; }
+.hb-num { width: 78px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-soft); flex: none; font-weight: 600; }
+
+.alertline { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--line); }
+.alertline:first-child { border-top: none; }
+.alertdot { width: 9px; height: 9px; border-radius: 50%; margin-top: 5px; flex: none; }
+.alertline .at { font-size: 13px; font-weight: 600; color: var(--ink); }
+.alertline .as { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+
+.floorplan { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; }
+.room { padding: 10px 8px; border-radius: 10px; text-align: center; color: #fff; box-shadow: var(--shadow-sm); }
+.room.std { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); }
+.room.dlx { background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); }
+.room.suite { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+.room.stair { background: #cbd5e1; color: var(--ink-soft); }
+.room .code { display: block; font-size: 12px; margin-top: 3px; }
+
+.twocol { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px; }
+.section-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; color: var(--ink); }
+.section-title span.tag { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; color: var(--ink-faint); background: #f1f5f9; padding: 3px 8px; border-radius: 6px; }
+
+@media (max-width: 1040px) {
+  .stage { overflow-x: auto; }
+  .twocol { grid-template-columns: 1fr; }
+  .statgrid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -225,7 +380,7 @@ body{
       <div class="brand-mark">IOI</div>
       <div>
         <h1>Mehmonxona Navigatori</h1>
-        <p>IOI 2026 · O'zbekiston — dizayn maketi</p>
+        <p>IOI 2026 · O'zbekiston — Boshqaruv & Volontyor Tizimi</p>
       </div>
     </div>
     <div class="controls">
@@ -248,285 +403,694 @@ body{
 </div>
 
 <script>
-const notes = {
-  delegate: "<b>Delegatsiya a'zosi:</b> yagona vazifa — o'z xonasini imkon qadar tez topish. Qidiruvsiz, bitta ism kiritilgach natija 'chipta' ko'rinishida chiqadi: mehmonxona, qavat, xona raqami va u yergacha yo'nalish.",
-  volunteer: "<b>Volontyor:</b> o'z delegatsiyasini va uning a'zolarini tezda topish, kontakt va joylashuvni ko'rish uchun mo'ljallangan ro'yxat + xarita ko'rinishi.",
-  organizer: "<b>Tashkilotchi:</b> barcha mehmonxonalar bo'yicha umumiy nazorat — bandlik, sig'im ogohlantirishlari (masalan −110 o'rin taqchilligi) va konflikt-juftliklar (mamlakatlar ajratilishi) monitoringi."
+// Data Store
+const dataStore = {
+  volunteer: {
+    name: "Sardorbek Alimov",
+    code: "VL-104",
+    sector: "G'arbiy blok · Farg'ona binosi",
+    assignedDelegation: "kz"
+  },
+  delegations: {
+    kz: {
+      id: "kz",
+      name: "Qozog'iston",
+      flag: "🇰🇿",
+      hotel: "Farg'ona",
+      color: "var(--indigo)",
+      members: [
+        {
+          id: "kz-1",
+          name: "Aruzhan Bekova",
+          country: "Qozog'iston 🇰🇿",
+          role: "Contestant",
+          hotel: "Farg'ona",
+          floor: 3,
+          room: "305",
+          type: "STD",
+          avatar: "AB",
+          phone: "+7 701 555 0101",
+          status: "Checked-in",
+          roommates: [
+            { name: "Dina Nurlanovna", role: "Contestant", avatar: "DN", country: "Qozog'iston" },
+            { name: "Saltanat K.", role: "Contestant", avatar: "SK", country: "Qozog'iston" }
+          ]
+        },
+        {
+          id: "kz-2",
+          name: "Dina Nurlanovna",
+          country: "Qozog'iston 🇰🇿",
+          role: "Contestant",
+          hotel: "Farg'ona",
+          floor: 3,
+          room: "305",
+          type: "STD",
+          avatar: "DN",
+          phone: "+7 701 555 0102",
+          status: "Checked-in",
+          roommates: [
+            { name: "Aruzhan Bekova", role: "Contestant", avatar: "AB", country: "Qozog'iston" },
+            { name: "Saltanat K.", role: "Contestant", avatar: "SK", country: "Qozog'iston" }
+          ]
+        },
+        {
+          id: "kz-3",
+          name: "Saltanat K.",
+          country: "Qozog'iston 🇰🇿",
+          role: "Contestant",
+          hotel: "Farg'ona",
+          floor: 3,
+          room: "305",
+          type: "STD",
+          avatar: "SK",
+          phone: "+7 701 555 0103",
+          status: "Checked-in",
+          roommates: [
+            { name: "Aruzhan Bekova", role: "Contestant", avatar: "AB", country: "Qozog'iston" },
+            { name: "Dina Nurlanovna", role: "Contestant", avatar: "DN", country: "Qozog'iston" }
+          ]
+        },
+        {
+          id: "kz-4",
+          name: "Yerlan Baibekov",
+          country: "Qozog'iston 🇰🇿",
+          role: "Team Leader",
+          hotel: "Farg'ona",
+          floor: 5,
+          room: "502",
+          type: "DLX",
+          avatar: "YB",
+          phone: "+7 701 555 0104",
+          status: "Checked-in",
+          roommates: [
+            { name: "Alikhan Omarov", role: "Deputy Leader", avatar: "AO", country: "Qozog'iston" }
+          ]
+        },
+        {
+          id: "kz-5",
+          name: "Alikhan Omarov",
+          country: "Qozog'iston 🇰🇿",
+          role: "Deputy Leader",
+          hotel: "Farg'ona",
+          floor: 5,
+          room: "502",
+          type: "DLX",
+          avatar: "AO",
+          phone: "+7 701 555 0105",
+          status: "Checked-in",
+          roommates: [
+            { name: "Yerlan Baibekov", role: "Team Leader", avatar: "YB", country: "Qozog'iston" }
+          ]
+        },
+        {
+          id: "kz-6",
+          name: "Nurlan Smailov",
+          country: "Qozog'iston 🇰🇿",
+          role: "Contestant",
+          hotel: "Farg'ona",
+          floor: 3,
+          room: "306",
+          type: "STD",
+          avatar: "NS",
+          phone: "+7 701 555 0106",
+          status: "Arriving Today",
+          roommates: [
+            { name: "Timur Kasymov", role: "Contestant", avatar: "TK", country: "Qozog'iston" }
+          ]
+        }
+      ]
+    },
+    in: {
+      id: "in",
+      name: "Hindiston",
+      flag: "🇮🇳",
+      hotel: "Andijon",
+      color: "var(--amber)",
+      members: [
+        {
+          id: "in-1",
+          name: "Aarav Sharma",
+          country: "Hindiston 🇮🇳",
+          role: "Contestant",
+          hotel: "Andijon",
+          floor: 2,
+          room: "210",
+          type: "STD",
+          avatar: "AS",
+          phone: "+91 98765 43210",
+          status: "Checked-in",
+          roommates: [
+            { name: "Rohan Verma", role: "Contestant", avatar: "RV", country: "Hindiston" }
+          ]
+        },
+        {
+          id: "in-2",
+          name: "Dr. Rajesh Gupta",
+          country: "Hindiston 🇮🇳",
+          role: "Team Leader",
+          hotel: "Andijon",
+          floor: 4,
+          room: "401",
+          type: "DLX",
+          avatar: "RG",
+          phone: "+91 98765 00001",
+          status: "Checked-in",
+          roommates: []
+        }
+      ]
+    },
+    uz: {
+      id: "uz",
+      name: "O'zbekiston",
+      flag: "🇺🇿",
+      hotel: "Xorazm",
+      color: "var(--blue)",
+      members: [
+        {
+          id: "uz-1",
+          name: "Jasurbek Raxmatov",
+          country: "O'zbekiston 🇺🇿",
+          role: "Contestant",
+          hotel: "Xorazm",
+          floor: 4,
+          room: "412",
+          type: "STD",
+          avatar: "JR",
+          phone: "+998 90 123 4567",
+          status: "Checked-in",
+          roommates: [
+            { name: "Bekzod Karimov", role: "Contestant", avatar: "BK", country: "O'zbekiston" }
+          ]
+        }
+      ]
+    }
+  }
 };
 
-let state = {role:'delegate', device:'mobile'};
+const notes = {
+  delegate: "<b>Delegatsiya a'zosi:</b> yagona vazifa — o'z xonasini tez topish. Natija chipta ko'rinishida chiqariladi: mehmonxona, qavat, xona raqami, xonadoshlar va xarita.",
+  volunteer: "<b>Volontyor:</b> o'ziga biriktirilgan delegatsiya vakillarini boshqarish paneli. A'zo ustiga bosganda, u delegat sifatida tizimga kirganda ko'rinadigan to'liq sahifa (delegateContent) ochiladi.",
+  organizer: "<b>Tashkilotchi:</b> barcha mehmonxonalar bo'yicha umumiy nazorat — bandlik, sig'im ogohlantirishlari va konflikt monitoringi."
+};
 
-document.getElementById('roletabs').addEventListener('click', e=>{
-  const b = e.target.closest('button'); if(!b) return;
-  document.querySelectorAll('#roletabs button').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); state.role = b.dataset.role; render();
+let state = {
+  role: 'delegate',
+  device: 'mobile',
+  selectedDelegationId: 'kz',
+  selectedMemberId: null,
+  volunteerFilter: 'all',
+  searchQuery: '',
+  isFilterOpen: false
+};
+
+// Event Listeners
+document.getElementById('roletabs').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  document.querySelectorAll('#roletabs button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  state.role = b.dataset.role;
+  state.selectedMemberId = null; // reset sub-page view when role changes
+  render();
 });
-document.getElementById('devicetoggle').addEventListener('click', e=>{
-  const b = e.target.closest('button'); if(!b) return;
-  document.querySelectorAll('#devicetoggle button').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); state.device = b.dataset.device; render();
+
+document.getElementById('devicetoggle').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  document.querySelectorAll('#devicetoggle button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  state.device = b.dataset.device;
+  render();
 });
 
-// ---------- content blocks ----------
-
-function delegateContent(){
-  return `
-  <div class="appbar">
-    <div><div class="who">Assalomu alaykum, Aruzhan</div><div class="sub">Qozog'iston delegatsiyasi · Contestant</div></div>
-    <div class="avatar">AR</div>
-  </div>
-  <div style="padding:0 18px 16px;">
-    <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>Familiya yoki ID bo'yicha qidirish...</div>
-  </div>
-  <div style="padding:0 18px 14px;">
-    <div class="ticket">
-      <div class="ticket-top">
-        <div><div class="country">Qozog'iston 🇰🇿</div><div class="name">Aruzhan Bekova</div></div>
-        <div class="role-badge">Contestant</div>
-      </div>
-      <div class="perf"></div><div class="dash"></div>
-      <div class="ticket-bottom">
-        <div class="tb-block">
-          <div class="tb-label">Mehmonxona</div>
-          <div class="tb-hotel"><span class="chip" style="background:var(--fargona)">Farg'ona</span></div>
-        </div>
-        <div class="tb-block">
-          <div class="tb-label">Qavat / Xona</div>
-          <div class="tb-value">3 · 305</div>
-        </div>
-        <div class="tb-block" style="flex:.7">
-          <div class="tb-label">Turi</div>
-          <div class="tb-value small">STD</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div style="padding:0 18px 14px;">
-    <div class="mini-map"><div class="pin"></div><div class="youarehere">Siz shu yerdasiz</div></div>
-  </div>
-  <button class="route-btn">Yo'nalishni ko'rsatish
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-  </button>
-  <div style="padding:0 18px 22px; flex:1;">
-    <div class="card">
-      <div class="section-title" style="margin-bottom:6px;">Xonadoshlaringiz <span class="tag">305-xona</span></div>
-      <div class="roommate-row"><div class="rm-av">DN</div><div><div class="rm-name">Dina Nurlanovna</div><div class="rm-sub">Qozog'iston · Contestant</div></div></div>
-      <div class="roommate-row"><div class="rm-av">SK</div><div><div class="rm-name">Saltanat K.</div><div class="rm-sub">Qozog'iston · Contestant</div></div></div>
-    </div>
-  </div>`;
+// Helper: Find member by ID
+function findMemberById(id) {
+  for (let key in dataStore.delegations) {
+    const found = dataStore.delegations[key].members.find(m => m.id === id);
+    if (found) return found;
+  }
+  return dataStore.delegations.kz.members[0]; // fallback
 }
 
-function volunteerContent(){
-  const rows = [
-    {flag:'🇰🇿',name:"Qozog'iston",sub:"Farg'ona · 80/9 · 6 a'zo",n:6,c:'var(--fargona)'},
-    {flag:'🇮🇳',name:"Hindiston",sub:"Andijon · 80/10 · 8 a'zo",n:8,c:'var(--andijon)'},
-    {flag:'🇺🇿',name:"O'zbekiston (host)",sub:"Xorazm · 80/16 · 12 a'zo",n:12,c:'var(--xorazm)'},
-    {flag:'🇯🇵',name:"Yaponiya",sub:"Qoraqalpaqston · 80/15 · 5 a'zo",n:5,c:'var(--qoraqalpaq)'},
-    {flag:'🇺🇸',name:"AQSH",sub:"Kashkadaryo · 5 a'zo",n:5,c:'var(--kashkadaryo)'},
-    {flag:'🇮🇷',name:"Eron",sub:"Sirdaryo · 80/6 · 5 a'zo",n:5,c:'var(--sirdaryo)'},
-  ];
+// Render member detail card view (Delegate Content format)
+function renderMemberDetail(member, showBackButton = false) {
   return `
-  <div class="appbar">
-    <div><div class="who">Volontyor paneli</div><div class="sub">Sektor: G'arbiy blok · 24 ta delegatsiya</div></div>
-    <div class="avatar" style="background:var(--accent-soft); color:var(--accent-dark);">VL</div>
-  </div>
-  <div style="padding:0 18px 10px;">
-    <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>Delegatsiya yoki mamlakat qidirish...</div>
-  </div>
-  <div style="padding:0 18px 8px;">
-    <div class="filterrow">
-      <div class="chip outline on">Barchasi</div>
-      <div class="chip outline">Farg'ona</div>
-      <div class="chip outline">Andijon</div>
-      <div class="chip outline">Xorazm</div>
-      <div class="chip outline">Namangan</div>
+    ${showBackButton ? `
+      <button class="back-btn-header" onclick="goBackToVolunteerList()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Orqaga — Delegatsiya a'zolari ro'yxati
+      </button>
+    ` : ''}
+    
+    <div class="appbar">
+      <div>
+        <div class="who">${member.name}</div>
+        <div class="sub">${member.country} · ${member.role}</div>
+      </div>
+      <div class="avatar">${member.avatar}</div>
     </div>
-  </div>
-  <div style="padding:0 18px; flex:1;">
-    <div class="card" style="padding:4px 12px;">
-      ${rows.map(r=>`
-        <div class="deleg-row">
-          <div class="flag">${r.flag}</div>
-          <div class="deleg-main"><div class="t">${r.name}</div><div class="s">${r.sub}</div></div>
-          <span class="chip" style="background:${r.c}">${r.n}</span>
-        </div>`).join('')}
+
+    <div style="padding:14px 18px;">
+      <div class="ticket">
+        <div class="ticket-top">
+          <div>
+            <div class="country">${member.country}</div>
+            <div class="name">${member.name}</div>
+          </div>
+          <div class="role-badge">${member.role}</div>
+        </div>
+        <div class="perf"></div><div class="dash"></div>
+        <div class="ticket-bottom">
+          <div class="tb-block">
+            <div class="tb-label">Mehmonxona</div>
+            <div class="tb-hotel"><span class="chip" style="background:var(--indigo);">${member.hotel}</span></div>
+          </div>
+          <div class="tb-block">
+            <div class="tb-label">Qavat / Xona</div>
+            <div class="tb-value">${member.floor} · ${member.room}</div>
+          </div>
+          <div class="tb-block" style="flex:.7">
+            <div class="tb-label">Turi</div>
+            <div class="tb-value small">${member.type}</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>`;
+
+    <div style="padding:0 18px 14px;">
+      <div class="mini-map"><div class="pin"></div><div class="youarehere">Xona joylashuvi: ${member.hotel} · Qavat ${member.floor}</div></div>
+    </div>
+
+    <div class="action-btn-group">
+      <button class="btn-secondary" onclick="alert('Aloqa qilindi: ${member.phone}')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Qo'ng'iroq
+      </button>
+      <button class="btn-secondary" onclick="alert('Xabar yuborildi')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Telegram / SMS
+      </button>
+    </div>
+
+    <button class="route-btn">
+      Yo'nalishni ko'rsatish
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </button>
+
+    <div style="padding:0 18px 22px; flex:1;">
+      <div class="card">
+        <div class="section-title" style="margin-bottom:8px;">Xonadoshlari <span class="tag">${member.room}-xona</span></div>
+        ${member.roommates.length > 0 ? member.roommates.map(rm => `
+          <div class="roommate-row">
+            <div class="rm-av">${rm.avatar}</div>
+            <div>
+              <div class="rm-name">${rm.name}</div>
+              <div class="rm-sub">${rm.country} · ${rm.role}</div>
+            </div>
+          </div>
+        `).join('') : '<div style="font-size:12.5px; color:var(--ink-soft); padding:8px 0;">Bir kishilik xona (Xonadosh yo\'q)</div>'}
+      </div>
+    </div>
+  `;
 }
 
-function organizerMobile(){
+// Delegate Mobile & Desktop views
+function delegateContent() {
+  const defaultMember = dataStore.delegations.kz.members[0];
   return `
-  <div class="appbar">
-    <div><div class="who">Boshqaruv paneli</div><div class="sub">IOI 2026 · Jonli holat</div></div>
-    <div class="avatar" style="background:var(--indigo-soft); color:var(--indigo);">TZ</div>
-  </div>
-  <div style="padding:0 18px;">
-    <div class="statgrid" style="grid-template-columns:1fr 1fr;">
+    <div style="padding:14px 18px 10px;">
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>
+        <input type="text" placeholder="Ism, familiya yoki ID bo'yicha qidirish..." oninput="handleSearch(this.value)">
+      </div>
+    </div>
+    ${renderMemberDetail(defaultMember, false)}
+  `;
+}
+
+function delegateDesktop() {
+  const defaultMember = dataStore.delegations.kz.members[0];
+  return `
+    <div class="section-title" style="font-size:18px; margin-bottom:20px;">Shaxsiy mehmonxona chiptangiz</div>
+    <div class="twocol">
+      <div>
+        <div class="search" style="margin-bottom:18px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>
+          <input type="text" placeholder="Ism, familiya yoki ID bo'yicha qidirish...">
+        </div>
+        <div class="ticket" style="margin-bottom:18px;">
+          <div class="ticket-top">
+            <div><div class="country">${defaultMember.country}</div><div class="name">${defaultMember.name}</div></div>
+            <div class="role-badge">${defaultMember.role}</div>
+          </div>
+          <div class="perf"></div><div class="dash"></div>
+          <div class="ticket-bottom">
+            <div class="tb-block"><div class="tb-label">Mehmonxona</div><div class="tb-hotel"><span class="chip" style="background:var(--indigo);">${defaultMember.hotel}</span></div></div>
+            <div class="tb-block"><div class="tb-label">Qavat / Xona</div><div class="tb-value">${defaultMember.floor} · ${defaultMember.room}</div></div>
+            <div class="tb-block" style="flex:.7"><div class="tb-label">Turi</div><div class="tb-value small">${defaultMember.type}</div></div>
+          </div>
+        </div>
+        <button class="route-btn" style="width:100%; margin:0;">
+          Yo'nalishni ko'rsatish
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <div>
+        <div class="mini-map" style="height:220px; margin-bottom:18px;"><div class="pin"></div><div class="youarehere">Xona: ${defaultMember.hotel} · ${defaultMember.room}</div></div>
+        <div class="card">
+          <div class="section-title" style="margin-bottom:8px;">Xonadoshlaringiz <span class="tag">${defaultMember.room}-xona</span></div>
+          ${defaultMember.roommates.map(rm => `
+            <div class="roommate-row">
+              <div class="rm-av">${rm.avatar}</div>
+              <div>
+                <div class="rm-name">${rm.name}</div>
+                <div class="rm-sub">${rm.country} · ${rm.role}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// Volunteer Navigation Handlers
+function openMemberDetail(memberId) {
+  state.selectedMemberId = memberId;
+  render();
+}
+
+function goBackToVolunteerList() {
+  state.selectedMemberId = null;
+  render();
+}
+
+function filterVolunteerRole(role) {
+  state.volunteerFilter = role;
+  render();
+}
+
+function setVolunteerDelegation(delegId) {
+  state.selectedDelegationId = delegId;
+  state.selectedMemberId = null;
+  render();
+}
+
+function toggleFilterAccordion() {
+  state.isFilterOpen = !state.isFilterOpen;
+  render();
+}
+
+function handleSearch(q) {
+  state.searchQuery = q.toLowerCase();
+  render();
+}
+
+// Volunteer Content Renderers
+function volunteerContent() {
+  // If a member detail was opened by volunteer
+  if (state.selectedMemberId) {
+    const member = findMemberById(state.selectedMemberId);
+    return renderMemberDetail(member, true);
+  }
+
+  const activeDeleg = dataStore.delegations[state.selectedDelegationId] || dataStore.delegations.kz;
+  let members = activeDeleg.members;
+
+  // Filter by role
+  if (state.volunteerFilter === 'contestant') {
+    members = members.filter(m => m.role === 'Contestant');
+  } else if (state.volunteerFilter === 'leader') {
+    members = members.filter(m => m.role.includes('Leader'));
+  }
+
+  // Filter by search query
+  if (state.searchQuery) {
+    members = members.filter(m => 
+      m.name.toLowerCase().includes(state.searchQuery) ||
+      m.room.toLowerCase().includes(state.searchQuery) ||
+      m.role.toLowerCase().includes(state.searchQuery)
+    );
+  }
+
+  const hasActiveFilters = state.volunteerFilter !== 'all' || state.selectedDelegationId !== 'kz';
+
+  return `
+    <div class="appbar">
+      <div>
+        <div class="who">Volontyor: ${dataStore.volunteer.name}</div>
+        <div class="sub">${dataStore.volunteer.sector}</div>
+      </div>
+      <div class="avatar" style="background:var(--accent-soft); color:var(--accent-dark);">VL</div>
+    </div>
+
+    <div class="vol-banner">
+      <div>
+        <div class="title">Biriktirilgan delegatsiya</div>
+        <div class="name">${activeDeleg.name}</div>
+      </div>
+      <div class="badge-country">${activeDeleg.flag} ${activeDeleg.members.length} a'zo</div>
+    </div>
+
+    <div style="padding:0 18px 12px; display:flex; gap:10px; align-items:center;">
+      <div class="search" style="flex:1;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>
+        <input type="text" placeholder="A'zo ismi yoki xonasi bo'yicha..." value="${state.searchQuery}" oninput="handleSearch(this.value)">
+      </div>
+      <button class="filter-btn ${state.isFilterOpen ? 'active' : ''}" onclick="toggleFilterAccordion()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        Filtrlar
+        ${hasActiveFilters ? '<span class="filter-dot"></span>' : ''}
+      </button>
+    </div>
+
+    ${state.isFilterOpen ? `
+      <div class="filter-accordion-panel">
+        <div style="font-size:11px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;">Delegatsiyalar</div>
+        <div class="filterrow" style="padding:0 0 10px 0;">
+          <div class="chip outline ${state.selectedDelegationId==='kz'?'on':''}" onclick="setVolunteerDelegation('kz')">🇰🇿 Qozog'iston</div>
+          <div class="chip outline ${state.selectedDelegationId==='in'?'on':''}" onclick="setVolunteerDelegation('in')">🇮🇳 Hindiston</div>
+          <div class="chip outline ${state.selectedDelegationId==='uz'?'on':''}" onclick="setVolunteerDelegation('uz')">🇺🇿 O'zbekiston</div>
+        </div>
+
+        <div style="font-size:11px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;">Lavozim / Rol filtri</div>
+        <div class="filterrow" style="padding:0;">
+          <div class="chip outline ${state.volunteerFilter==='all'?'on':''}" onclick="filterVolunteerRole('all')">Barcha a'zolar (${activeDeleg.members.length})</div>
+          <div class="chip outline ${state.volunteerFilter==='contestant'?'on':''}" onclick="filterVolunteerRole('contestant')">Ishtirokchilar</div>
+          <div class="chip outline ${state.volunteerFilter==='leader'?'on':''}" onclick="filterVolunteerRole('leader')">Rahbarlar</div>
+        </div>
+      </div>
+    ` : ''}
+
+    <div style="padding:0 18px 18px; flex:1;">
+      <div style="font-size:12.5px; font-weight:700; color:var(--ink-soft); margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+        <span>Delegatsiya a'zolari</span>
+        <span style="font-size:11px; font-weight:600; color:var(--ink-faint);">Bosing: to'liq ma'lumot</span>
+      </div>
+
+      ${members.length > 0 ? members.map(m => `
+        <div class="member-card" onclick="openMemberDetail('${m.id}')">
+          <div class="m-avatar">${m.avatar}</div>
+          <div class="m-info">
+            <div class="name">
+              <span>${m.name}</span>
+              <span class="status-pill ${m.status==='Checked-in'?'checked':'arriving'}">${m.status==='Checked-in'?'Xonada':'Yo\'lda'}</span>
+            </div>
+            <div class="sub">
+              <span>${m.role}</span> · 
+              <span style="font-weight:600; color:var(--indigo);">${m.hotel} · ${m.room}-xona</span>
+            </div>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      `).join('') : `
+        <div class="card" style="text-align:center; padding:30px 20px; color:var(--ink-soft);">
+          Qidiruv bo'yicha hech qanday a'zo topilmadi.
+        </div>
+      `}
+    </div>
+  `;
+}
+
+function volunteerDesktop() {
+  if (state.selectedMemberId) {
+    const member = findMemberById(state.selectedMemberId);
+    return `
+      <div class="section-title" style="font-size:18px; margin-bottom:20px;">
+        <span>Volontyor Paneli — Vakil tafsilotlari</span>
+        <button class="back-btn-header" onclick="goBackToVolunteerList()">← Delegatsiya ro'yxatiga qaytish</button>
+      </div>
+      ${delegateDesktop()}
+    `;
+  }
+
+  const activeDeleg = dataStore.delegations[state.selectedDelegationId] || dataStore.delegations.kz;
+  let members = activeDeleg.members;
+
+  if (state.volunteerFilter === 'contestant') members = members.filter(m => m.role === 'Contestant');
+  if (state.volunteerFilter === 'leader') members = members.filter(m => m.role.includes('Leader'));
+  if (state.searchQuery) members = members.filter(m => m.name.toLowerCase().includes(state.searchQuery) || m.room.toLowerCase().includes(state.searchQuery));
+
+  const hasActiveFilters = state.volunteerFilter !== 'all' || state.selectedDelegationId !== 'kz';
+
+  return `
+    <div class="section-title" style="font-size:18px; margin-bottom:20px;">
+      <span>Volontyor boshqaruv paneli</span>
+      <span class="tag">Biriktirilgan: ${activeDeleg.name} ${activeDeleg.flag}</span>
+    </div>
+    <div class="twocol">
+      <div>
+        <div style="margin-bottom:14px; display:flex; gap:10px; align-items:center;">
+          <div class="search" style="flex:1;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>
+            <input type="text" placeholder="A'zo ismi yoki xonasi bo'yicha..." value="${state.searchQuery}" oninput="handleSearch(this.value)">
+          </div>
+          <button class="filter-btn ${state.isFilterOpen ? 'active' : ''}" onclick="toggleFilterAccordion()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filtrlar
+            ${hasActiveFilters ? '<span class="filter-dot"></span>' : ''}
+          </button>
+        </div>
+
+        ${state.isFilterOpen ? `
+          <div class="filter-accordion-panel" style="margin: 0 0 14px 0;">
+            <div style="font-size:11px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;">Delegatsiyalar</div>
+            <div class="filterrow" style="padding:0 0 10px 0;">
+              <div class="chip outline ${state.selectedDelegationId==='kz'?'on':''}" onclick="setVolunteerDelegation('kz')">🇰🇿 Qozog'iston</div>
+              <div class="chip outline ${state.selectedDelegationId==='in'?'on':''}" onclick="setVolunteerDelegation('in')">🇮🇳 Hindiston</div>
+              <div class="chip outline ${state.selectedDelegationId==='uz'?'on':''}" onclick="setVolunteerDelegation('uz')">🇺🇿 O'zbekiston</div>
+            </div>
+
+            <div style="font-size:11px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;">Lavozim / Rol filtri</div>
+            <div class="filterrow" style="padding:0;">
+              <div class="chip outline ${state.volunteerFilter==='all'?'on':''}" onclick="filterVolunteerRole('all')">Barcha a'zolar (${activeDeleg.members.length})</div>
+              <div class="chip outline ${state.volunteerFilter==='contestant'?'on':''}" onclick="filterVolunteerRole('contestant')">Ishtirokchilar</div>
+              <div class="chip outline ${state.volunteerFilter==='leader'?'on':''}" onclick="filterVolunteerRole('leader')">Rahbarlar</div>
+            </div>
+          </div>
+        ` : ''}
+
+        <div style="font-size:13px; font-weight:700; margin-bottom:10px; color:var(--ink-soft);">
+          Delegatsiya a'zolari (${members.length}) — ustiga bosib delegateContent rejimida oching:
+        </div>
+
+        ${members.map(m => `
+          <div class="member-card" onclick="openMemberDetail('${m.id}')">
+            <div class="m-avatar">${m.avatar}</div>
+            <div class="m-info">
+              <div class="name">
+                <span>${m.name}</span>
+                <span class="status-pill ${m.status==='Checked-in'?'checked':'arriving'}">${m.status==='Checked-in'?'Xonada':'Yo\'lda'}</span>
+              </div>
+              <div class="sub">
+                <span>${m.role}</span> · 
+                <span style="font-weight:600; color:var(--indigo);">${m.hotel} · ${m.room}-xona</span>
+              </div>
+            </div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        `).join('')}
+      </div>
+
+      <div>
+        <div class="mini-map" style="height:220px; margin-bottom:18px;">
+          <div class="pin"></div>
+          <div class="youarehere">${activeDeleg.hotel} binosi · ${activeDeleg.name} sektori</div>
+        </div>
+        <div class="card">
+          <div class="section-title">Volontyor yo'riqnomasi</div>
+          <p style="font-size:13px; color:var(--ink-soft); line-height:1.6;">
+            Delegatsiya a mehmonga kelganida ularning shaxsiy chiptalarini tekshirish va xonalariga kuzatib qo'yish uchun a'zo ustiga bosing.
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// Organizer Views
+function organizerMobile() {
+  return `
+    <div class="appbar">
+      <div><div class="who">Boshqaruv paneli</div><div class="sub">IOI 2026 · Jonli holat</div></div>
+      <div class="avatar" style="background:var(--indigo-soft); color:var(--indigo-dark);">TZ</div>
+    </div>
+    <div style="padding:14px 18px;">
+      <div class="statgrid" style="grid-template-columns:1fr 1fr;">
+        <div class="statcard"><div class="n">668</div><div class="l">Jami ishtirokchi</div></div>
+        <div class="statcard"><div class="n">9</div><div class="l">Mehmonxonalar</div></div>
+        <div class="statcard warn"><div class="n">−110</div><div class="l">O'rin taqchilligi</div></div>
+        <div class="statcard"><div class="n">95</div><div class="l">Mamlakatlar</div></div>
+      </div>
+    </div>
+    <div style="padding:0 18px 14px;">
+      <div class="card">
+        <div class="section-title">Ogohlantirishlar <span class="tag">3 ta faol</span></div>
+        <div class="alertline"><div class="alertdot" style="background:var(--red);"></div><div><div class="at">Farg'ona mehmonxonasi — sig'im oshib ketgan</div><div class="as">112/98 o'rin band qilingan</div></div></div>
+        <div class="alertline"><div class="alertdot" style="background:var(--amber);"></div><div><div class="at">AQSH / Eron — bir binoda</div><div class="as">Konflikt-juftlik qoidasi tekshiruvi kerak</div></div></div>
+        <div class="alertline"><div class="alertdot" style="background:var(--amber);"></div><div><div class="at">Jinsi bo'yicha ajratish — Sirdaryo</div><div class="as">2 ta xonada aralash taqsimot topildi</div></div></div>
+      </div>
+    </div>
+    <div style="padding:0 18px 22px; flex:1;">
+      <div class="card">
+        <div class="section-title">Mehmonxonalar bandligi</div>
+        <div class="hotelbar-row"><div class="hb-label">Farg'ona</div><div class="hb-track"><div class="hb-fill" style="width:100%; background:var(--red);"></div></div><div class="hb-num">112/98</div></div>
+        <div class="hotelbar-row"><div class="hb-label">Xorazm</div><div class="hb-track"><div class="hb-fill" style="width:88%; background:var(--accent);"></div></div><div class="hb-num">86/98</div></div>
+        <div class="hotelbar-row"><div class="hb-label">Andijon</div><div class="hb-track"><div class="hb-fill" style="width:74%; background:var(--accent);"></div></div><div class="hb-num">72/98</div></div>
+        <div class="hotelbar-row"><div class="hb-label">Namangan</div><div class="hb-track"><div class="hb-fill" style="width:61%; background:var(--accent);"></div></div><div class="hb-num">60/98</div></div>
+      </div>
+    </div>
+  `;
+}
+
+function organizerDesktop() {
+  return `
+    <div class="section-title" style="font-size:18px; margin-bottom:20px;">Boshqaruv paneli — Jonli monitoring</div>
+    <div class="statgrid" style="margin-bottom:24px;">
       <div class="statcard"><div class="n">668</div><div class="l">Jami ishtirokchi</div></div>
       <div class="statcard"><div class="n">9</div><div class="l">Mehmonxonalar</div></div>
       <div class="statcard warn"><div class="n">−110</div><div class="l">O'rin taqchilligi</div></div>
       <div class="statcard"><div class="n">95</div><div class="l">Mamlakatlar</div></div>
     </div>
-  </div>
-  <div style="padding:16px 18px;">
-    <div class="card">
-      <div class="section-title">Ogohlantirishlar <span class="tag">3 ta faol</span></div>
-      <div class="alertline"><div class="alertdot" style="background:var(--red);"></div><div><div class="at">Farg'ona mehmonxonasi — sig'im oshib ketgan</div><div class="as">112/98 o'rin band qilingan</div></div></div>
-      <div class="alertline"><div class="alertdot" style="background:var(--amber);"></div><div><div class="at">AQSH / Eron — bir binoda</div><div class="as">Konflikt-juftlik qoidasi tekshiruvi kerak</div></div></div>
-      <div class="alertline"><div class="alertdot" style="background:var(--amber);"></div><div><div class="at">Jinsi bo'yicha ajratish — Sirdaryo</div><div class="as">2 ta xonada aralash taqsimot topildi</div></div></div>
-    </div>
-  </div>
-  <div style="padding:0 18px 22px; flex:1;">
-    <div class="card">
-      <div class="section-title">Mehmonxonalar bandligi</div>
-      <div class="hotelbar-row"><div class="hb-label">Farg'ona</div><div class="hb-track"><div class="hb-fill" style="width:100%; background:var(--red);"></div></div><div class="hb-num">112/98</div></div>
-      <div class="hotelbar-row"><div class="hb-label">Xorazm</div><div class="hb-track"><div class="hb-fill" style="width:88%; background:var(--accent);"></div></div><div class="hb-num">86/98</div></div>
-      <div class="hotelbar-row"><div class="hb-label">Andijon</div><div class="hb-track"><div class="hb-fill" style="width:74%; background:var(--accent);"></div></div><div class="hb-num">72/98</div></div>
-      <div class="hotelbar-row"><div class="hb-label">Namangan</div><div class="hb-track"><div class="hb-fill" style="width:61%; background:var(--accent);"></div></div><div class="hb-num">60/98</div></div>
-    </div>
-  </div>`;
-}
-
-function organizerDesktop(){
-  return `
-  <div class="section-title" style="font-size:17px; margin-bottom:20px;">Boshqaruv paneli — jonli holat</div>
-  <div class="statgrid" style="margin-bottom:24px;">
-    <div class="statcard"><div class="n">668</div><div class="l">Jami ishtirokchi</div></div>
-    <div class="statcard"><div class="n">9</div><div class="l">Mehmonxonalar</div></div>
-    <div class="statcard warn"><div class="n">−110</div><div class="l">O'rin taqchilligi</div></div>
-    <div class="statcard"><div class="n">95</div><div class="l">Mamlakatlar</div></div>
-  </div>
-  <div class="twocol">
-    <div>
-      <div class="card" style="margin-bottom:20px;">
-        <div class="section-title">Mehmonxonalar bandligi <span class="tag">9 ta obyekt</span></div>
-        <div class="hotelbar-row"><div class="hb-label">Farg'ona</div><div class="hb-track"><div class="hb-fill" style="width:100%; background:var(--red);"></div></div><div class="hb-num">112/98</div></div>
-        <div class="hotelbar-row"><div class="hb-label">Xorazm</div><div class="hb-track"><div class="hb-fill" style="width:88%; background:var(--accent);"></div></div><div class="hb-num">86/98</div></div>
-        <div class="hotelbar-row"><div class="hb-label">Andijon</div><div class="hb-track"><div class="hb-fill" style="width:74%; background:var(--accent);"></div></div><div class="hb-num">72/98</div></div>
-        <div class="hotelbar-row"><div class="hb-label">Namangan</div><div class="hb-track"><div class="hb-fill" style="width:61%; background:var(--accent);"></div></div><div class="hb-num">60/98</div></div>
-        <div class="hotelbar-row"><div class="hb-label">Sirdaryo</div><div class="hb-track"><div class="hb-fill" style="width:52%; background:var(--accent);"></div></div><div class="hb-num">51/98</div></div>
-        <div class="hotelbar-row"><div class="hb-label">Qoraqalpaq.</div><div class="hb-track"><div class="hb-fill" style="width:45%; background:var(--accent);"></div></div><div class="hb-num">44/98</div></div>
+    <div class="twocol">
+      <div>
+        <div class="card" style="margin-bottom:20px;">
+          <div class="section-title">Mehmonxonalar bandligi <span class="tag">9 ta obyekt</span></div>
+          <div class="hotelbar-row"><div class="hb-label">Farg'ona</div><div class="hb-track"><div class="hb-fill" style="width:100%; background:var(--red);"></div></div><div class="hb-num">112/98</div></div>
+          <div class="hotelbar-row"><div class="hb-label">Xorazm</div><div class="hb-track"><div class="hb-fill" style="width:88%; background:var(--accent);"></div></div><div class="hb-num">86/98</div></div>
+          <div class="hotelbar-row"><div class="hb-label">Andijon</div><div class="hb-track"><div class="hb-fill" style="width:74%; background:var(--accent);"></div></div><div class="hb-num">72/98</div></div>
+          <div class="hotelbar-row"><div class="hb-label">Namangan</div><div class="hb-track"><div class="hb-fill" style="width:61%; background:var(--accent);"></div></div><div class="hb-num">60/98</div></div>
+        </div>
+        <div class="card">
+          <div class="section-title">3-qavat xonalar sxemasi <span class="tag">Farg'ona mehmonxonasi</span></div>
+          <div class="floorplan">
+            <div class="room dlx">DLX<span class="code">311</span></div>
+            <div class="room std">STD<span class="code">310</span></div>
+            <div class="room std">STD<span class="code">309</span></div>
+            <div class="room std">STD<span class="code">312</span></div>
+            <div class="room stair">LIFT</div>
+            <div class="room dlx">DLX<span class="code">308</span></div>
+            <div class="room std">STD<span class="code">313</span></div>
+            <div class="room stair">LIFT</div>
+            <div class="room std">STD<span class="code">307</span></div>
+          </div>
+        </div>
       </div>
-      <div class="card">
-        <div class="section-title">3-qavat xonalar sxemasi <span class="tag">Farg'ona mehmonxonasi</span></div>
-        <div class="floorplan">
-          <div class="room dlx">DLX<span class="code">311</span></div>
-          <div class="room std">STD<span class="code">310</span></div>
-          <div class="room std">STD<span class="code">309</span></div>
-          <div class="room std">STD<span class="code">312</span></div>
-          <div class="room stair">LIFT</div>
-          <div class="room dlx">DLX<span class="code">308</span></div>
-          <div class="room std">STD<span class="code">313</span></div>
-          <div class="room stair">LIFT</div>
-          <div class="room std">STD<span class="code">307</span></div>
-          <div class="room std">STD<span class="code">314</span></div>
-          <div class="room stair">ZINA</div>
-          <div class="room std">STD<span class="code">306</span></div>
-          <div class="room std">STD<span class="code">315</span></div>
-          <div class="room dlx">DLX<span class="code">301</span></div>
-          <div class="room suite">SUITE<span class="code">303</span></div>
+      <div>
+        <div class="card" style="margin-bottom:20px;">
+          <div class="section-title">Ogohlantirishlar <span class="tag">3 ta faol</span></div>
+          <div class="alertline"><div class="alertdot" style="background:var(--red);"></div><div><div class="at">Farg'ona — sig'im oshib ketgan</div><div class="as">112/98 o'rin band, 14 kishi taqsimlanmagan</div></div></div>
+          <div class="alertline"><div class="alertdot" style="background:var(--amber);"></div><div><div class="at">AQSH / Eron — bir binoda</div><div class="as">Konflikt-juftlik qoidasi tekshiruvi kerak</div></div></div>
+          <div class="alertline"><div class="alertdot" style="background:var(--amber);"></div><div><div class="at">Jinsi bo'yicha ajratish — Sirdaryo</div><div class="as">2 ta xonada aralash taqsimot topildi</div></div></div>
         </div>
       </div>
     </div>
-    <div>
-      <div class="card" style="margin-bottom:20px;">
-        <div class="section-title">Ogohlantirishlar <span class="tag">3 ta faol</span></div>
-        <div class="alertline"><div class="alertdot" style="background:var(--red);"></div><div><div class="at">Farg'ona — sig'im oshib ketgan</div><div class="as">112/98 o'rin band, 14 kishi taqsimlanmagan</div></div></div>
-        <div class="alertline"><div class="alertdot" style="background:var(--amber);"></div><div><div class="at">AQSH / Eron — bir binoda</div><div class="as">Konflikt-juftlik qoidasi tekshiruvi kerak</div></div></div>
-        <div class="alertline"><div class="alertdot" style="background:var(--amber);"></div><div><div class="at">Jinsi bo'yicha ajratish — Sirdaryo</div><div class="as">2 ta xonada aralash taqsimot topildi</div></div></div>
-      </div>
-      <div class="card">
-        <div class="section-title">So'nggi qidiruvlar <span class="tag">jonli</span></div>
-        <div class="deleg-row" style="padding:10px 0;"><div class="flag">🇰🇿</div><div class="deleg-main"><div class="t">Qozog'iston</div><div class="s">Volontyor tomonidan — 2 daq. oldin</div></div></div>
-        <div class="deleg-row" style="padding:10px 0;"><div class="flag">🇮🇳</div><div class="deleg-main"><div class="t">Hindiston</div><div class="s">Volontyor tomonidan — 6 daq. oldin</div></div></div>
-        <div class="deleg-row" style="padding:10px 0; border-bottom:none;"><div class="flag">🇺🇿</div><div class="deleg-main"><div class="t">Bekova A. — 305</div><div class="s">Delegat tomonidan — 9 daq. oldin</div></div></div>
-      </div>
-    </div>
-  </div>`;
+  `;
 }
 
-function delegateDesktop(){
-  return `
-  <div class="section-title" style="font-size:17px; margin-bottom:20px;">Xonangizni toping</div>
-  <div class="twocol">
-    <div>
-      <div class="search" style="margin-bottom:18px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>Familiya yoki ID bo'yicha qidirish...</div>
-      <div class="ticket" style="margin-bottom:18px;">
-        <div class="ticket-top">
-          <div><div class="country">Qozog'iston 🇰🇿</div><div class="name">Aruzhan Bekova</div></div>
-          <div class="role-badge">Contestant</div>
-        </div>
-        <div class="perf"></div><div class="dash"></div>
-        <div class="ticket-bottom">
-          <div class="tb-block"><div class="tb-label">Mehmonxona</div><div class="tb-hotel"><span class="chip" style="background:var(--fargona)">Farg'ona</span></div></div>
-          <div class="tb-block"><div class="tb-label">Qavat / Xona</div><div class="tb-value">3 · 305</div></div>
-          <div class="tb-block" style="flex:.7"><div class="tb-label">Turi</div><div class="tb-value small">STD</div></div>
-        </div>
-      </div>
-      <button class="route-btn" style="margin:0;">Yo'nalishni ko'rsatish
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-    <div>
-      <div class="mini-map" style="height:220px; margin-bottom:18px;"><div class="pin"></div><div class="youarehere">Siz shu yerdasiz</div></div>
-      <div class="card">
-        <div class="section-title" style="margin-bottom:6px;">Xonadoshlaringiz <span class="tag">305-xona</span></div>
-        <div class="roommate-row"><div class="rm-av">DN</div><div><div class="rm-name">Dina Nurlanovna</div><div class="rm-sub">Qozog'iston · Contestant</div></div></div>
-        <div class="roommate-row"><div class="rm-av">SK</div><div><div class="rm-name">Saltanat K.</div><div class="rm-sub">Qozog'iston · Contestant</div></div></div>
-      </div>
-    </div>
-  </div>`;
-}
-
-function volunteerDesktop(){
-  const rows = [
-    {flag:'🇰🇿',name:"Qozog'iston",sub:"Farg'ona · 80/9",n:6,c:'var(--fargona)'},
-    {flag:'🇮🇳',name:"Hindiston",sub:"Andijon · 80/10",n:8,c:'var(--andijon)'},
-    {flag:'🇺🇿',name:"O'zbekiston",sub:"Xorazm · 80/16",n:12,c:'var(--xorazm)'},
-    {flag:'🇯🇵',name:"Yaponiya",sub:"Qoraqalpaqston · 80/15",n:5,c:'var(--qoraqalpaq)'},
-    {flag:'🇺🇸',name:"AQSH",sub:"Kashkadaryo",n:5,c:'var(--kashkadaryo)'},
-    {flag:'🇮🇷',name:"Eron",sub:"Sirdaryo · 80/6",n:5,c:'var(--sirdaryo)'},
-    {flag:'🇧🇷',name:"Braziliya",sub:"Namangan · 80/9",n:5,c:'var(--namangan)'},
-    {flag:'🇩🇪',name:"Germaniya",sub:"Buxoro",n:4,c:'var(--buxoro)'},
-  ];
-  return `
-  <div class="section-title" style="font-size:17px; margin-bottom:20px;">Delegatsiyalar — G'arbiy sektor</div>
-  <div class="twocol">
-    <div>
-      <div class="search" style="margin-bottom:12px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-3.5-3.5"/></svg>Delegatsiya yoki mamlakat qidirish...</div>
-      <div class="filterrow" style="margin-bottom:10px;">
-        <div class="chip outline on">Barchasi</div>
-        <div class="chip outline">Farg'ona</div>
-        <div class="chip outline">Andijon</div>
-        <div class="chip outline">Xorazm</div>
-        <div class="chip outline">Namangan</div>
-      </div>
-      <div class="card" style="padding:4px 12px;">
-        ${rows.map(r=>`
-          <div class="deleg-row">
-            <div class="flag">${r.flag}</div>
-            <div class="deleg-main"><div class="t">${r.name}</div><div class="s">${r.sub}</div></div>
-            <span class="chip" style="background:${r.c}">${r.n}</span>
-          </div>`).join('')}
-      </div>
-    </div>
-    <div>
-      <div class="mini-map" style="height:230px; margin-bottom:16px;"><div class="pin"></div><div class="youarehere">Farg'ona · 80/9</div></div>
-      <div class="card">
-        <div class="section-title">Farg'ona — 305-xona</div>
-        <div class="roommate-row"><div class="rm-av">AB</div><div><div class="rm-name">Aruzhan Bekova</div><div class="rm-sub">Contestant</div></div></div>
-        <div class="roommate-row"><div class="rm-av">DN</div><div><div class="rm-name">Dina Nurlanovna</div><div class="rm-sub">Contestant</div></div></div>
-      </div>
-    </div>
-  </div>`;
-}
-
-function render(){
+// Main Render Function
+function render() {
   document.getElementById('rolenote').innerHTML = notes[state.role];
   const stage = document.getElementById('stage');
 
-  if(state.device==='mobile'){
-    let inner = state.role==='delegate' ? delegateContent() : state.role==='volunteer' ? volunteerContent() : organizerMobile();
+  if (state.device === 'mobile') {
+    let inner = state.role === 'delegate' ? delegateContent() : state.role === 'volunteer' ? volunteerContent() : organizerMobile();
     stage.innerHTML = `
       <div class="phone">
         <div class="phone-screen">
@@ -535,7 +1099,7 @@ function render(){
         </div>
       </div>`;
   } else {
-    let inner = state.role==='delegate' ? delegateDesktop() : state.role==='volunteer' ? volunteerDesktop() : organizerDesktop();
+    let inner = state.role === 'delegate' ? delegateDesktop() : state.role === 'volunteer' ? volunteerDesktop() : organizerDesktop();
     stage.innerHTML = `
       <div class="desktopwin">
         <div class="winbar"><span></span><span></span><span></span></div>
@@ -543,6 +1107,7 @@ function render(){
       </div>`;
   }
 }
+
 render();
 </script>
 </body>
